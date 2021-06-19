@@ -6,17 +6,13 @@ import 'Sub.dart';
 
 class RedditClient {
 
-  final  String url = "https://www.reddit.com/r/UnsentLetters/new.json";
+  final  String url = "https://www.reddit.com/r/UnsentLetters/top.json";
+  //final  String url = https://www.reddit.com/r/UnsentLetters/top.json?after=t3_o3igj4
 
 
   Future<Sub> fetch() async {
     final response = await getDio().get(url);
-    final results = json.decode(response.body);
+      return Sub.fromJson(response.data);
 
-    if (response.statusCode == 200) {
-      return Sub.fromJson(results);
-    } else {
-      throw results;
-    }
   }
 }
