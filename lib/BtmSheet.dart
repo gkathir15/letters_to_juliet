@@ -21,7 +21,7 @@ class BtmSheet extends StatelessWidget {
       list = state.datas;
     }
     return DraggableScrollableSheet(
-      maxChildSize: .80,
+      maxChildSize: 1,
       expand: false,
       minChildSize: 0.25,
       initialChildSize: 0.5,
@@ -43,18 +43,29 @@ class BtmSheet extends StatelessWidget {
                     Container(color: AppColors.colorList[position%5],
                       child: Padding(
                         padding: const EdgeInsets.all(30.0),
-                        child: Center(child: Text(list[position].data!.title!)),
+                        child: Center(child: Text(list[position].data!.title!,
+                          style: GoogleFonts.chivo(fontStyle: FontStyle.normal,fontSize: 20,color: AppColors.lightTxt),)),
                       ),
                     ),
-                    RichText(
-                     text: TextSpan(
-                        text: list[position].data!.selftext![0],
-                         style: GoogleFonts.inter(
-                         fontSize: 20),
-                         children: [TextSpan(
-                           text: list[position].data!.selftext!.substring(1,(list[position].data!.selftext!.length-1))
-                         )]
-                     ))
+                    SafeArea(
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: RichText(textAlign: TextAlign.start,
+                         text: TextSpan(
+                            text: list[position].data!.selftext![0],
+                             style: GoogleFonts.inter(
+                               letterSpacing: 1,
+                               wordSpacing: 5,
+                               color: AppColors.darkTxt,
+                             fontSize: 40),
+                             children: [TextSpan(
+                               text: list[position].data!.selftext!.substring(1,(list[position].data!.selftext!.length-1)),style: GoogleFonts.inter(
+                                 color: AppColors.darkTxt,
+                                 fontSize: 20)
+                             )]
+                         )),
+                      ),
+                    )
                   ],
                 ));
           },

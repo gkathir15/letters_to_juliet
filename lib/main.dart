@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -43,7 +44,9 @@ class _MyAppState extends State<MyApp> {
               return Scaffold(
                   // bottomSheet: BtmSheet(),
                   appBar: AppBar(
-                    title: Text("Fallen words"),
+                    backgroundColor: Colors.white,
+                    centerTitle: true,
+                    title: Text("Fallen words",style: GoogleFonts.chivo(color: AppColors.darkTxt),),
                   ),
                   body: ListView.builder(
                     itemBuilder: (context, position) {
@@ -53,7 +56,9 @@ class _MyAppState extends State<MyApp> {
                           Scaffold.of(context)
                               .showBottomSheet<void>((BuildContext context) {
                             return BtmSheet(position);
-                          });
+                          },clipBehavior: Clip.antiAlias,
+                              elevation: 10,shape:  RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(topLeft: const Radius.circular(10),topRight: const Radius.circular(10))));
                         },
                         child: Card(color: AppColors.colorList[position%5],
                           elevation: 5,
