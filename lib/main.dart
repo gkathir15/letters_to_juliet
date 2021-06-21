@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:letters_to_juliet/AboutBottomSheet.dart';
 import 'package:letters_to_juliet/AppColors.dart';
 import 'package:letters_to_juliet/BtmSheet.dart';
 import 'package:letters_to_juliet/RedditClient.dart';
@@ -10,6 +12,8 @@ import 'package:letters_to_juliet/SubEvent.dart';
 import 'package:letters_to_juliet/SubStatus.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   runApp(MyApp());
 }
 
@@ -44,6 +48,14 @@ class _MyAppState extends State<MyApp> {
               return Scaffold(
                   // bottomSheet: BtmSheet(),
                   appBar: AppBar(
+                    actions: [
+                      InkWell(child: Icon(Icons.info,color: Colors.orange,),onTap: (){
+                        showModalBottomSheet(context: context, builder: (context)
+                        {
+                          return AboutBottomSheet();
+                        });
+                      },)
+                    ],
                     backgroundColor: Colors.white,
                     centerTitle: true,
                     title: Text("Fallen words",style: GoogleFonts.chivo(color: AppColors.darkTxt),),
@@ -68,7 +80,7 @@ class _MyAppState extends State<MyApp> {
                             child: Padding(
                               padding: const EdgeInsets.fromLTRB(30, 20 ,30, 20),
                               child: Text(
-                                state.datas[position].data!.title!,
+                                state.datas[position].data!.title!.fixUtf(),
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.chivo(fontStyle: FontStyle.normal,fontSize: 20,color: AppColors.lightTxt),
                               ),

@@ -16,6 +16,8 @@ class AppColors {
   static const color6 = Color(0XFF0b354a);
   static const darkTxt = Color(0XFF080d34);
   static const brownTxt = Color(0XFF505243);
+  static const rewardid = "ca-app-pub-6011809596899441/8900475532";
+  static const testRewardid = "ca-app-pub-3940256099942544/5224354917";
 
   static const colorList = [color2,color3,color4,color6,color6];
 
