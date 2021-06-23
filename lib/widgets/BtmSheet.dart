@@ -6,23 +6,26 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:letters_to_juliet/AppColors.dart';
-import 'package:letters_to_juliet/Sub.dart';
-import 'package:letters_to_juliet/SubBloc.dart';
-import 'package:letters_to_juliet/SubStatus.dart';
+import 'package:letters_to_juliet/models/Sub.dart';
+import 'package:letters_to_juliet/bloc/SubBloc.dart';
+import 'package:letters_to_juliet/bloc/SubEvent.dart';
+import 'package:letters_to_juliet/bloc/SubStatus.dart';
 
-class BtmSheet extends StatelessWidget {
+class BtmSheet extends StatefulWidget {
   int position = 0;
 
   BtmSheet(this.position);
 
   @override
-  Widget build(BuildContext context) {
-    late List<Children> list;
+  _BtmSheetState createState() => _BtmSheetState();
+}
 
-    var state = BlocProvider.of<SubBloc>(context, listen: false).state;
-    if (state is SubsLoaded) {
-      list = state.datas;
-    }
+class _BtmSheetState extends State<BtmSheet> {
+  PageController? _pageController;
+
+  @override
+  Widget build(BuildContext context) {
+
     return DraggableScrollableSheet(
       maxChildSize: .90,
       expand: false,
@@ -30,9 +33,9 @@ class BtmSheet extends StatelessWidget {
       initialChildSize: 0.5,
       builder: (BuildContext context, ScrollController scrollController) {
         return PageView.builder(
-          controller: PageController(initialPage: position),
+          controller: PageController(initialPage: widget.position),
           onPageChanged: (pos){
-            position = pos;
+            widget.position = pos;
           },
           pageSnapping: true,
           allowImplicitScrolling: false,
@@ -46,7 +49,9 @@ class BtmSheet extends StatelessWidget {
                     Container(color: AppColors.colorList[position%5],
                       child: Padding(
                         padding: const EdgeInsets.all(30.0),
-                        child: Center(child: Text(list[position].data!.title!.fixUtf(),
+                        child: Center(child: Text((BlocProvider.of<SubBloc>(context, listen: false)
+                            .state as SubsLoaded)
+                            .datas[position].data!.title!.fixUtf(),
                           style: GoogleFonts.chivo(fontStyle: FontStyle.normal,fontSize: 20,color: AppColors.lightTxt),)),
                       ),
                     ),
@@ -54,14 +59,20 @@ class BtmSheet extends StatelessWidget {
                       padding: const EdgeInsets.all(12.0),
                       child: RichText(textAlign: TextAlign.start,
                        text: TextSpan(
-                          text: list[position].data!.selftext![0],
+                          text: (BlocProvider.of<SubBloc>(context, listen: false)
+                              .state as SubsLoaded)
+                              .datas[position].data!.selftext![0],
                            style: GoogleFonts.inter(
                              letterSpacing: 1,
                              wordSpacing: 5,
                              color: AppColors.darkTxt,
                            fontSize: 40),
                            children: [TextSpan(
-                             text: list[position].data!.selftext!.substring(1,(list[position].data!.selftext!.length-1)).fixUtf(),style: GoogleFonts.inter(
+                             text: (BlocProvider.of<SubBloc>(context, listen: false)
+                                 .state as SubsLoaded)
+                                 .datas[position].data!.selftext!.substring(1,((BlocProvider.of<SubBloc>(context, listen: false)
+                                 .state as SubsLoaded)
+                                 .datas[position].data!.selftext!.length-1)).fixUtf(),style: GoogleFonts.inter(
                                color: AppColors.darkTxt,
                                fontSize: 20)
                            )]
@@ -88,10 +99,30 @@ class BtmSheet extends StatelessWidget {
                   ],
                 ));
           },
-          itemCount: list.length,
+          itemCount: (BlocProvider.of<SubBloc>(context, listen: false)
+              .state as SubsLoaded)
+              .datas.length,
         );
       },
     );
+  }
+  @override
+  void initState() {
+    _pageController = PageController(initialPage: widget.position);
+    _pageController!.addListener(() {
+      if (_pageController!.position.pixels ==
+          _pageController!.position.maxScrollExtent) {
+        BlocProvider.of<SubBloc>(context, listen: false)
+            .add(EndOfListReached());
+      }
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _pageController!.dispose();
+    super.dispose();
   }
 }
 

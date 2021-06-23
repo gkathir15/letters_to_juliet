@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:letters_to_juliet/models/Sub.dart';
 
-import 'Sub.dart';
 
 @immutable
-abstract class SubEvent extends Equatable {
+abstract class SubEvent {
 
 }
 
@@ -14,9 +14,6 @@ class ItemClicked extends SubEvent{
 
   ItemClicked(this.itemId);
 
-
-  @override
-  List<Object?> get props => [itemId];
 }
 
 
@@ -25,12 +22,12 @@ class ItemsFetched extends SubEvent{
 
   ItemsFetched(this.subs);
 
-  @override
-  List<Object?> get props => subs;
-}
+ }
 
 class FetchItem extends SubEvent{
-  @override
-  List<Object?> get props => [];
+
+}
+class EndOfListReached extends SubEvent{
+
 
 }

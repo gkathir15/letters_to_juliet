@@ -2,7 +2,7 @@
     package="com.gk.letterstojuliet.letters_to_juliet">
     <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:label="letters_to_juliet"
+        android:label="Fallen words"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

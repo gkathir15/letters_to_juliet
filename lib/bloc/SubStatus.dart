@@ -1,18 +1,17 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:letters_to_juliet/Sub.dart';
+import 'package:letters_to_juliet/models/Sub.dart';
 
 @immutable
-abstract class SubState extends Equatable {
-  SubState() : super();
+abstract class SubState  {
+
 }
 
 class SubsUpdated extends SubState {
   final List<Children> datas;
 
   SubsUpdated(this.datas);
-  @override
-  List<Object?> get props => [datas];
+
 }
 
 class SubsLoaded extends SubState {
@@ -20,18 +19,15 @@ class SubsLoaded extends SubState {
 
   SubsLoaded(this.datas);
 
-  @override
-  List<Object?> get props => [datas];
+
 
 
 }
 
 class SubEmpty extends SubState {
-  @override
-  List<Object?> get props => [];
+
 }
 
 class SubLoading extends SubState {
-  @override
-  List<Object?> get props => [];
+
 }
