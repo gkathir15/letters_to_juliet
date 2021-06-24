@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AppColors {
   static const mainColor = Color(0XFFe5eefc);
@@ -19,13 +20,14 @@ class AppColors {
   static const rewardid = "ca-app-pub-6011809596899441/8900475532";
   static const testRewardid = "ca-app-pub-3940256099942544/5224354917";
 
-  static const colorList = [color2,color3,color4,color6,color6];
+  static const colorList = [color2, color3, color4, color6, color6];
 
-
-
-
-  static final  lLightTheme = ThemeData(backgroundColor: AppColors.mainColor,cardColor: lightBlue,shadowColor: lightBlueShadow
-      ,textTheme: TextTheme(headline1:TextStyle(color: AppColors.styleColor),
+  static final lLightTheme = ThemeData(
+      backgroundColor: AppColors.mainColor,
+      cardColor: lightBlue,
+      shadowColor: lightBlueShadow,
+      textTheme: TextTheme(
+          headline1: TextStyle(color: AppColors.styleColor),
           headline2: TextStyle(color: AppColors.activeColor)));
 }
 
@@ -44,4 +46,18 @@ extension HexColor on Color {
       '${red.toRadixString(16).padLeft(2, '0')}'
       '${green.toRadixString(16).padLeft(2, '0')}'
       '${blue.toRadixString(16).padLeft(2, '0')}';
+}
+
+extension urlLauncher on String {
+  Future<void> launchInBrowser() async {
+    if (await canLaunch(this)) {
+      await launch(
+        this,
+        forceSafariVC: false,
+        forceWebView: false,
+      );
+    } else {
+      throw 'Could not launch $this';
+    }
+  }
 }

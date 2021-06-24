@@ -25,7 +25,6 @@ class _BtmSheetState extends State<BtmSheet> {
 
   @override
   Widget build(BuildContext context) {
-
     return DraggableScrollableSheet(
       maxChildSize: .90,
       expand: false,
@@ -34,7 +33,7 @@ class _BtmSheetState extends State<BtmSheet> {
       builder: (BuildContext context, ScrollController scrollController) {
         return PageView.builder(
           controller: PageController(initialPage: widget.position),
-          onPageChanged: (pos){
+          onPageChanged: (pos) {
             widget.position = pos;
           },
           pageSnapping: true,
@@ -46,66 +45,93 @@ class _BtmSheetState extends State<BtmSheet> {
                 controller: scrollController,
                 child: Column(
                   children: [
-                    Container(color: AppColors.colorList[position%5],
+                    Container(
+                      color: AppColors.colorList[position % 5],
                       child: Padding(
                         padding: const EdgeInsets.all(30.0),
-                        child: Center(child: Text((BlocProvider.of<SubBloc>(context, listen: false)
-                            .state as SubsLoaded)
-                            .datas[position].data!.title!.fixUtf(),
-                          style: GoogleFonts.chivo(fontStyle: FontStyle.normal,fontSize: 20,color: AppColors.lightTxt),)),
+                        child: Center(
+                            child: Text(
+                          (BlocProvider.of<SubBloc>(context, listen: false)
+                                  .state as SubsLoaded)
+                              .datas[position]
+                              .data!
+                              .title!
+                              .fixUtf(),
+                          style: GoogleFonts.chivo(
+                              fontStyle: FontStyle.normal,
+                              fontSize: 20,
+                              color: AppColors.lightTxt),
+                        )),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(12.0),
-                      child: RichText(textAlign: TextAlign.start,
-                       text: TextSpan(
-                          text: (BlocProvider.of<SubBloc>(context, listen: false)
-                              .state as SubsLoaded)
-                              .datas[position].data!.selftext![0],
-                           style: GoogleFonts.inter(
-                             letterSpacing: 1,
-                             wordSpacing: 5,
-                             color: AppColors.darkTxt,
-                           fontSize: 40),
-                           children: [TextSpan(
-                             text: (BlocProvider.of<SubBloc>(context, listen: false)
-                                 .state as SubsLoaded)
-                                 .datas[position].data!.selftext!.substring(1,((BlocProvider.of<SubBloc>(context, listen: false)
-                                 .state as SubsLoaded)
-                                 .datas[position].data!.selftext!.length-1)).fixUtf(),style: GoogleFonts.inter(
-                               color: AppColors.darkTxt,
-                               fontSize: 20)
-                           )]
-                       )),
+                      child: RichText(
+                          textAlign: TextAlign.start,
+                          text: TextSpan(
+                              text: (BlocProvider.of<SubBloc>(context,
+                                          listen: false)
+                                      .state as SubsLoaded)
+                                  .datas[position]
+                                  .data!
+                                  .selftext![0],
+                              style: GoogleFonts.inter(
+                                  letterSpacing: 1,
+                                  wordSpacing: 5,
+                                  color: AppColors.darkTxt,
+                                  fontSize: 40),
+                              children: [
+                                TextSpan(
+                                    text: (BlocProvider.of<SubBloc>(context,
+                                                listen: false)
+                                            .state as SubsLoaded)
+                                        .datas[position]
+                                        .data!
+                                        .selftext!
+                                        .substring(
+                                            1,
+                                            ((BlocProvider.of<SubBloc>(context,
+                                                            listen: false)
+                                                        .state as SubsLoaded)
+                                                    .datas[position]
+                                                    .data!
+                                                    .selftext!
+                                                    .length -
+                                                1))
+                                        .fixUtf(),
+                                    style: GoogleFonts.inter(
+                                        color: AppColors.darkTxt, fontSize: 20))
+                              ])),
                     ),
-                   Row(
-                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                     mainAxisSize: MainAxisSize.max,
-                     children: [
-                     Padding(
-                       padding: const EdgeInsets.all(20.0),
-                       child: Align(alignment: Alignment.bottomRight,
-                         child: InkWell(onTap: (){
-
-                         },child: Icon(Icons.bookmark_add),),),
-                     ),Padding(
-                       padding: const EdgeInsets.all(20.0),
-                       child: Align(alignment: Alignment.bottomLeft,
-                         child: InkWell(onTap: (){
-
-                         },child: Icon(Icons.link_rounded),),),
-                     )
-                   ],)
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: InkWell(
+                          onTap: () {
+                            (BlocProvider.of<SubBloc>(context, listen: false)
+                                    .state as SubsLoaded)
+                                .datas[position]
+                                .data!
+                                .url!
+                                .launchInBrowser();
+                          },
+                          child: Icon(Icons.link_rounded),
+                        ),
+                      ),
+                    )
                   ],
                 ));
           },
-          itemCount: (BlocProvider.of<SubBloc>(context, listen: false)
-              .state as SubsLoaded)
-              .datas.length,
+          itemCount: (BlocProvider.of<SubBloc>(context, listen: false).state
+                  as SubsLoaded)
+              .datas
+              .length,
         );
       },
     );
   }
+
   @override
   void initState() {
     _pageController = PageController(initialPage: widget.position);

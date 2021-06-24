@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "77711945128",
+    "project_id": "broken-words",
+    "storage_bucket": "broken-words.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77711945128:android:ec34b2cbcd2715871ac19d",
+        "android_client_info": {
+          "package_name": "com.gk.letterstojuliet.letters_to_juliet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77711945128-lq20ma90dn39bi51ucflbpjtum23eqvl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbOUVsSqc9zPLHCj0M9lmg-ykV8HzdyfE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77711945128-lq20ma90dn39bi51ucflbpjtum23eqvl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
