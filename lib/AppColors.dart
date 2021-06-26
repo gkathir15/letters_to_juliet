@@ -24,8 +24,6 @@ class AppColors {
 
   static final lLightTheme = ThemeData(
       backgroundColor: AppColors.mainColor,
-      cardColor: lightBlue,
-      shadowColor: lightBlueShadow,
       textTheme: TextTheme(
           headline1: TextStyle(color: AppColors.styleColor),
           headline2: TextStyle(color: AppColors.activeColor)));

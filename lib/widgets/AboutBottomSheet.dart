@@ -81,22 +81,28 @@ class _AboutBottomSheetState extends State<AboutBottomSheet>
                   Padding(
                     padding: const EdgeInsets.only(top: 40, bottom: 50),
                     child: SizedBox(
+                  
                       height: 200,
                       width: 200,
-                      child: InkWell(
-                        child: RotationTransition(
-                            turns: Tween(begin: 0.0, end: 1.0)
-                                .animate(CurvedAnimation(
-                              parent: _animationController!,
-                              curve: Curves.elasticOut,
-                            )),
-                            child: Image.asset("images/piz.png")),
-                        onTap: () {
-                          _rewardedAd!.show(onUserEarnedReward:
-                              (RewardedAd ad, RewardItem rewardItem) {
-                            print(rewardItem.toString());
-                          });
-                        },
+                      child: Card(shadowColor:Colors.white,
+                        shape:  RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(200)),
+                        elevation: 30,
+                        child: InkWell(
+                          child: RotationTransition(
+                              turns: Tween(begin: 0.0, end: 1.0)
+                                  .animate(CurvedAnimation(
+                                parent: _animationController!,
+                                curve: Curves.elasticInOut,
+                              )),
+                              child: Image.asset("images/piz.png")),
+                          onTap: () {
+                            _rewardedAd!.show(onUserEarnedReward:
+                                (RewardedAd ad, RewardItem rewardItem) {
+                              print(rewardItem.toString());
+                            });
+                          },
+                        ),
                       ),
                     ),
                   ),
@@ -139,9 +145,10 @@ class _AboutBottomSheetState extends State<AboutBottomSheet>
         ));
 
     _animationController = AnimationController(
-      duration: const Duration(milliseconds: 3000),
+      duration: const Duration(milliseconds: 5000),
       vsync: this,
-    );
+    )..repeat();
+    
 
     super.initState();
   }

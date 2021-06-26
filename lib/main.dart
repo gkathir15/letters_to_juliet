@@ -129,10 +129,14 @@ class Home extends StatelessWidget {
                   // return Text(state.datas[position].data!.title!);
                   return InkWell(
                     onTap: () {
-                      Scaffold.of(context).showBottomSheet<void>(
-                          (BuildContext context) {
-                        return BtmSheet(position);
-                      },
+                      showModalBottomSheet(
+                        isScrollControlled: true,
+                        isDismissible: true,
+                        enableDrag: true,
+                          context: context,
+                          builder: (context) {
+                            return BtmSheet(position);
+                          },
                           clipBehavior: Clip.antiAlias,
                           elevation: 10,
                           shape: RoundedRectangleBorder(
@@ -189,7 +193,7 @@ class Splash extends StatelessWidget {
       child: Center(
         child: Text("Fallen Words",
             style:
-                GoogleFonts.amaticSc(fontSize: 60, color: AppColors.darkTxt)),
+                GoogleFonts.amaticSc(fontSize: 60, color: AppColors.darkTxt,fontWeight: FontWeight.w700)),
       ),
     );
   }
