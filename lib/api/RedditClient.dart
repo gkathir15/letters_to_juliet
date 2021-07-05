@@ -1,8 +1,7 @@
 import 'dart:async';
-import 'dart:convert';
 import 'package:letters_to_juliet/DioPerf.dart';
 
-import 'models/Sub.dart';
+import '../models/Sub.dart';
 
 class RedditClient {
 

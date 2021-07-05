@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:letters_to_juliet/RedditClient.dart';
+import 'package:letters_to_juliet/api/RedditClient.dart';
 import 'package:letters_to_juliet/models/Sub.dart';
 import 'package:letters_to_juliet/bloc/SubEvent.dart';
 import 'package:letters_to_juliet/bloc/SubStatus.dart';

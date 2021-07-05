@@ -1,12 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:letters_to_juliet/AppColors.dart';
-import 'package:letters_to_juliet/models/Sub.dart';
 import 'package:letters_to_juliet/bloc/SubBloc.dart';
 import 'package:letters_to_juliet/bloc/SubEvent.dart';
 import 'package:letters_to_juliet/bloc/SubStatus.dart';
